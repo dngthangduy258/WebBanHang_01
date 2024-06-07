@@ -1,4 +1,5 @@
 ﻿@model List<Product>
+@ViewBag ViewBag
 <partial name="_Notification" />
 <div class="row mb-4">
     <div class="col-md-6">
@@ -46,3 +47,43 @@
         }
     </tbody>
 </table>
+
+<div>
+    <ul class="pagination">
+        <li class="page-item @(ViewBag.PageIndex == null || ViewBag.PageIndex <= 1 ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="1">&laquo;</a>
+        </li>
+
+        @if (ViewBag.PageIndex > 3)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-page="1">1</a>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">...</span>
+            </li>
+        }
+
+        @for (var i = Math.Max(1, ViewBag.PageIndex - 2); i <= Math.Min(ViewBag.PageSum, ViewBag.PageIndex + 2); i++)
+        {
+            <li class="page-item @(ViewBag.PageIndex == i ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+            </li>
+        }
+
+        @if (ViewBag.PageIndex < ViewBag.PageSum - 2)
+        {
+            <li class="page-item disabled">
+                <span class="page-link">...</span>
+            </li>
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-page="@ViewBag.PageSum">@ViewBag.PageSum</a>
+            </li>
+        }
+
+        <li class="page-item @(ViewBag.PageIndex == null || ViewBag.PageIndex >= ViewBag.PageSum ? "disabled" : "")">
+            <a class="page-link" asp-action="Index" asp-route-page="@ViewBag.PageSum">&raquo;</a>
+        </li>
+    </ul>
+
+</div>

@@ -15,7 +15,7 @@ namespace WebBanHang.Models
         public string Name { get; set; }
 
         public string Description { get; set; }
-        [Range(1, 100), Required(ErrorMessage = "Chưa nhập giá")]
+        [Range(1, 10000), Required(ErrorMessage = "Chưa nhập giá")]
 
         public double Price { get; set; }
         [Range(1, 100), Required(ErrorMessage = "Vui lòng chọn dòng sản phẩm")]
