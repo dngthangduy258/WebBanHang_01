@@ -1,13 +1,13 @@
 ﻿@model List<Product>
-@ViewBag ViewBag
+
 <partial name="_Notification" />
-<div class="row mb-4">
+<div class="row mb-4 mt-2">
     <div class="col-md-6">
         <h2>LIST PRODUCT</h2>
     </div>
     <div class="col-md-6 text-right">
         <a asp-action="Add" class="btn btn-primary">
-            <i class="bi bi-plus-circle-fill"></i> Add New
+            <i class="far fa-plus"></i> Add New
         </a>
     </div>
 </div>
@@ -18,7 +18,7 @@
             <th>Price</th>
             <th>Category</th>
             <th>Image</th>
-            <th>Action </th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -31,22 +31,27 @@
                 <td>
                     @if (x.ImageUrl != null)
                     {
-                        <img src="@x.ImageUrl" style="width:100px" />
-                    }
+                        <img src="@x.ImageUrl" style="width:100px" />}
                 </td>
                 <td>
                     <a asp-action="Update" asp-route-id="@x.Id" class="btn btn-success">
-
-                        <i class="bi bi-pencil-square"></i> Edit
+                        <i class="far fa-edit"></i> Edit
                     </a>
                     <a asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">
-                        <i class="bi bi-trash"></i> Delete
+                        <i class="far fa-trash-alt"></i> Delete
                     </a>
                 </td>
             </tr>
-        }
+}
     </tbody>
 </table>
+
+<datalist id="categories">
+    @foreach (var x in Model.Select(m => m.Category.Name).Distinct())
+    {
+        <option value="@x"></option>
+}
+</datalist>
 
 <div>
     <ul class="pagination">
